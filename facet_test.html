@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Facet Test</title>
+    </head>
+    <body>
+        <form action="http://www.pythonistic.com/gangnam/searchsize/shirts" method="post" id="testform">
+            <input type="hidden" name="sex" value="M"/>
+            <input type="hidden" name="hc_men_apparel_button_up_shirt_size" value="2XL"/>
+            <input type="hidden" name="hc_men_apparel_general_size" value="2XL"/>
+            <input type="hidden" name="hc_men_size" value="2XL"/>
+            
+            <input type="button" value="Test it" onclick="submitForm()"/>
+        </form>
+        <div id="output"/>
+        
+        <script language="javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <script language="javascript">
+        function submitForm() {
+            var testValues = {
+                sex: 'M',
+                hc_men_apparel_button_up_shirt_size: '2XL',
+                hc_men_apparel_general_size: '2XL',
+                hc_men_size: '2XL'
+            };
+            
+            $.ajax({
+            url: "http://www.pythonistic.com/gangnam/searchsize/shirts",
+            type: "POST",
+            data: JSON.stringify(testValues),
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                $("#output").html(data);
+            },
+            error: function(data) {
+                console.log("error");
+            }
+        });
+        }
+        </script>
+    </body>
+</html>
