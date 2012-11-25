@@ -345,7 +345,8 @@
 "txCategoryFacet_ZetaCategories4",
 "txCategoryFacet_ZetaCategories5",
 "width",
-"word"]}{"statusCode":"200",
+"word"]};
+{"statusCode":"200",
 "facetFields":["attrFacet_Accessories",
 "attrFacet_Accessory_Materials",
 "attrFacet_Accessory_Prints",

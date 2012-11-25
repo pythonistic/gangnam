@@ -37,42 +37,52 @@ def search(keyword):
 
 @route('/searchsize/:keyword', method="POST")
 def searchsize(keyword):
-    sex = request.forms.sex
+    # out = "request.forms: " + str(request.forms.items()[0])
+    infields = request.json
+    out = ""
+    sex = infields['gender']
     request_facets = {}
-    if sex == 'M':
+    if sex == 'Mens':
         for facet in mens_facets:
-            if facet in request.forms:
-                request_facets[facet] = request.forms[facet]
-    elif sex == 'F':
+            if facet in infields:
+                request_facets[facet] = infields[facet]
+    elif sex == 'Womens':
         for facet in womens_facets:
-            if facet in request.forms:
-                request_facets[facet] = request.forms[facet]
+            if facet in infields:
+                request_facets[facet] = infields[facet]
     for facet in universal_facets:
-        if facet in request.forms:
-                request_facets[facet] = request.forms[facet]
-    
-    url = host + "/Search/term/%s?filters=%s&key=%s" % (quote_plus(keyword), build_facets(request_facets), key)
+        if facet in infields:
+                request_facets[facet] = infields[facet]
+    #out += "facets: " + str(request_facets)
+    url = host + '/Search/term/%s?filters=%s&includes=["colorFacet","gender","priceFacet","size","sizegroup"]&key=%s' % (quote_plus(keyword), build_facets(request_facets), key)
     try:
         response = urllib2.urlopen(url)
-        out = ""
+        #out += "/* <b>REQUEST</b><br/><pre>" + url + "</pre><p/><b>RESPONSE</b><br/><pre> */\n"
         for line in response:
             out += line
-        return "<b>REQUEST</b><br/><pre>" + str(url) + "</pre><p/><b>RESPONSE</b><br/><pre>" + str(out) + "</pre>"
+        return out #+ "</pre>"
     except URLError as e:
-        return "<font color=\"red\">Error: %s</font>" % (str(e))
+        #return "<font color=\"red\">Error: %s</font>\n%s" % (str(e), url)
+        return "{'ERROR':'%s %s'}" % (str(e), url)
 
 def build_facets(request_facets):
-    out = {}
+    map = {}
     for facet in request_facets:
-        if type(request_facets[facet] == str):
-            out['"' + facet + '"'] = '["' + request_facets[facet] + '"]'
-        elif type(request_facets[facet] == list):
+        value = request_facets[facet]
+        if type(value) == str:
+            map['"' + facet + '"'] = '["' + value + '"]'
+        elif type(value) == list:
             values = []
-            for value in request_facets[facet]:
-                values.append('"' + value + '"')
-            out['"' + facet + '"'] = '[' + ",".join(values) + ']'
-    
-    return out
+            for elem in value:
+                values.append('"' + elem + '"')
+            map['"' + facet + '"'] = '[' + ",".join(values) + ']'
+        
+    out = "{"
+    for key in map:
+        if len(out) > 1:
+            out += ","
+        out += key + ":" + map[key]
+    return out + "}"
     
 mens_facets = [    
 "hc_men_apparel_blazer_size",
@@ -105,7 +115,8 @@ womens_facets = [
 
 universal_facets = [
     "size",
-    "colorFacet"
+    "colorFacet",
+    "gender"
 ]
     
 config = ConfigParser.SafeConfigParser()

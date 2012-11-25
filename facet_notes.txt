@@ -1,0 +1,36 @@
+http://api.zappos.com/Search/term/shirts?includes=[%22colorFacet%22,%22gender%22,%22priceFacet%22,%22size%22,%22sizegroup%22]&key=62ba0539a0d8b1a39e98c159d00a13beee2b69cf
+
+{"statusCode":"200",
+"results":[
+{"styleId":"1989709",
+"priceFacet":["$200.00 and Over"],
+"colorId":"244321",
+"brandName":"DSQUARED2",
+"size":["4","Othr"],
+"productId":"8021173",
+"percentOff":"0%",
+"price":"$555.00",
+"originalPrice":"$555.00",
+"productUrl":"http:\/\/www.zappos.com\/product\/8021173\/color\/244321",
+"gender":["Womens"],
+"colorFacet":"Blue",
+"productName":"Shirt",
+"thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/1\/9\/8\/9\/7\/0\/1989709-t-THUMBNAIL.jpg"},
+{"styleId":"1936921",
+"priceFacet":["$200.00 and Under",
+"$100.00 and Under","$50.00 and Under"],
+"colorId":"325423",
+"brandName":"RVCA",
+"size":["XS","XXL","S","L","M","XL"],
+"productId":"7994966",
+"percentOff":"0%",
+"price":"$30.00",
+"originalPrice":"$30.00",
+"productUrl":"http:\/\/www.zappos.com\/product\/7994966\/color\/325423",
+"gender":["Mens"],
+"colorFacet":"Gray","productName":"Camby Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/1\/9\/3\/6\/9\/2\/1936921-t-THUMBNAIL.jpg"},{"styleId":"2022795","priceFacet":["$200.00 and Under","$100.00 and Under","$50.00 and Under"],"colorId":"360815","brandName":"RVCA","size":["XS","XXL","S","L","M","XL"],"productId":"7994966","percentOff":"0%","price":"$30.00","originalPrice":"$30.00","productUrl":"http:\/\/www.zappos.com\/product\/7994966\/color\/360815","gender":["Mens"],"colorFacet":"Brown","productName":"Camby Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/0\/2\/2\/7\/9\/2022795-t-THUMBNAIL.jpg"},{"styleId":"2022796","priceFacet":["$200.00 and Under","$100.00 and Under","$50.00 and Under"],"colorId":"120441","brandName":"RVCA","size":["XS","XXL","S","L","M","XL"],"productId":"7994966","percentOff":"0%","price":"$30.00","originalPrice":"$30.00","productUrl":"http:\/\/www.zappos.com\/product\/7994966\/color\/120441","gender":["Mens"],"colorFacet":"Beige","productName":"Camby Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/0\/2\/2\/7\/9\/2022796-t-THUMBNAIL.jpg"},{"styleId":"2116914","priceFacet":["$200.00 and Under"],"colorId":"391730","brandName":"Vineyard Vines","size":["XXL","L","XL"],"productId":"8077978","percentOff":"9%","price":"$112.99","originalPrice":"$125.00","productUrl":"http:\/\/www.zappos.com\/product\/8077978\/color\/391730","gender":["Mens"],"colorFacet":"White","productName":"Overdyed Shep Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/1\/1\/6\/9\/1\/2116914-t-THUMBNAIL.jpg"},{"styleId":"2098748","priceFacet":["$200.00 and Under"],"colorId":"9","brandName":"Robert Graham","size":["XXL","S","L","3XL","M","4XL","XL"],"productId":"8070687","percentOff":"0%","price":"$128.00","originalPrice":"$128.00","productUrl":"http:\/\/www.zappos.com\/product\/8070687\/color\/9","gender":["Mens"],"colorFacet":"Navy","productName":"York V-Neck Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/0\/9\/8\/7\/4\/2098748-t-THUMBNAIL.jpg"},{"styleId":"2098770","priceFacet":["$200.00 and Under","$100.00 and Under"],"colorId":"401","brandName":"Robert Graham","size":["XXL","S","L","3XL","M","4XL","XL"],"productId":"8070680","percentOff":"0%","price":"$98.00","originalPrice":"$98.00","productUrl":"http:\/\/www.zappos.com\/product\/8070680\/color\/401","gender":["Mens"],"colorFacet":"Gray","productName":"Crown Crew Neck Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/0\/9\/8\/7\/7\/2098770-t-THUMBNAIL.jpg"},{"styleId":"2199237","priceFacet":["$200.00 and Under","$100.00 and Under","$50.00 and Under"],"colorId":"3","brandName":"Metal Mulisha","size":["XXL","S","L","M","XL"],"productId":"8116694","percentOff":"0%","price":"$26.00","originalPrice":"$26.00","productUrl":"http:\/\/www.zappos.com\/product\/8116694\/color\/3","gender":["Mens"],"colorFacet":"Black","productName":"Remains L\/S Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/1\/9\/9\/2\/3\/2199237-t-THUMBNAIL.jpg"},{"styleId":"2098731","priceFacet":["$200.00 and Under","$100.00 and Under"],"colorId":"3","brandName":"Robert Graham","size":["XXL","S","L","3XL","M","4XL","XL"],"productId":"8070680","percentOff":"0%","price":"$98.00","originalPrice":"$98.00","productUrl":"http:\/\/www.zappos.com\/product\/8070680\/color\/3","gender":["Mens"],"colorFacet":"Black","productName":"Crown Crew Neck Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/0\/9\/8\/7\/3\/2098731-t-THUMBNAIL.jpg"},{"styleId":"2098732","priceFacet":["$200.00 and Under","$100.00 and Under"],"colorId":"6","brandName":"Robert Graham","size":["XXL","S","L","3XL","M","4XL","XL"],"productId":"8070680","percentOff":"0%","price":"$98.00","originalPrice":"$98.00","productUrl":"http:\/\/www.zappos.com\/product\/8070680\/color\/6","gender":["Mens"],"colorFacet":"Brown","productName":"Crown Crew Neck Shirt","thumbnailImageUrl":"http:\/\/www.zappos.com\/images\/z\/2\/0\/9\/8\/7\/3\/2098732-t-THUMBNAIL.jpg"}],"term":"shirts","originalTerm":"shirts","currentResultCount":"10","totalResultCount":"10302"}
+
+
+http://api.zappos.com/Search/term/shirts?filters={%22gender%22:[%22Mens%22]}&includes=[%22colorFacet%22,%22gender%22,%22priceFacet%22,%22size%22,%22sizegroup%22]&key=62ba0539a0d8b1a39e98c159d00a13beee2b69cf
+
+http://api.zappos.com/Search/term/shirts?filters={%22gender%22:[%22Mens%22],%22size%22:[%222XL%22,%223XL%22]}&includes=[%22colorFacet%22,%22gender%22,%22priceFacet%22,%22size%22,%22sizegroup%22]&key=62ba0539a0d8b1a39e98c159d00a13beee2b69cf
