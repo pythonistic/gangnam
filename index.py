@@ -1,41 +1,64 @@
-#!/usr/bin/python
- 
-import os
-import sys
- 
-libpath = os.getcwd() + os.sep
-sys.path.extend([libpath + 'lib/python2.6', libpath + 'bin'])
- 
-from bottle import request, route
-import bottle
-from wsgiref.handlers import CGIHandler
- 
-import ConfigParser
-import urllib2
-from urllib2 import URLError
-from urllib import quote_plus
- 
-@route('/')
+#!/bin/env python
+
+from flask import Flask, make_response, render_template, request, Response
+
+import configparser
+import json
+from urllib.request import urlopen
+from urllib.error import URLError
+from urllib.parse import quote_plus
+
+app = Flask(__name__)
+app.debug = True
+
+
+@app.route('/')
 def index():
     return "OK"
- 
-@route('/hello/:name')
+
+
+@app.route('/hello/<name>')
 def hello(name):
     return "Hello %s" % (name)
- 
-@route('/search/:keyword')
+
+
+@app.route('/swiper')
+def swiper():
+    return render_template('swiper.html')
+
+
+@app.route('/search/<keyword>')
 def search(keyword):
     url = host + "/Search/term/%s?key=%s" % (quote_plus(keyword), key)
-    try:
-        response = urllib2.urlopen(url)
-        out = ""
-        for line in response:
-            out += line
-        return "<pre>" + str(out) + "</pre>"
-    except URLError as e:
-        return "<font color=\"red\">Error: %s</font>" % (str(e))
+    results = json.dumps(query_api(url)['results'])
+    response = Response(results, 200, mimetype="application/json")
+    return response
 
-@route('/searchsize/:keyword', method="POST")
+
+@app.route('/search_rows/<keyword>')
+def search_rows(keyword):
+    print("entering search_rows")
+    url = host + "/Search/term/%s?key=%s" % (quote_plus(keyword), key)
+    results = query_api(url)['results']
+    print("got %s results" % len(results))
+    # build the result rows
+    result_rows = []
+    start_idx = 0
+    while start_idx < len(results):
+        start_idx = len(result_rows) * 6
+        end_idx = start_idx + 6
+        result_row = []
+        for idx in range(start_idx, end_idx):
+            if idx < len(results):
+                result_row.append(results[idx])
+            else:
+                result_row.append(None)
+        result_rows.append(result_row)
+    print(result_rows)
+    # render the page fragment
+    return render_template('search_rows.html', result_rows=result_rows)
+
+@app.route('/searchsize/<keyword>', methods=["POST"])
 def searchsize(keyword):
     # out = "request.forms: " + str(request.forms.items()[0])
     infields = request.json
@@ -55,15 +78,26 @@ def searchsize(keyword):
                 request_facets[facet] = infields[facet]
     #out += "facets: " + str(request_facets)
     url = host + '/Search/term/%s?filters=%s&includes=["colorFacet","gender","priceFacet","size","sizegroup"]&key=%s' % (quote_plus(keyword), build_facets(request_facets), key)
+    results = query_api(url)
+    return "<pre>" + str(results) + "</pre>"
+
+def query_api(url):
+    """
+    Query the Zappos API and return the JSON object turned into a dict.
+    :param url: the Zappos API URI.
+    :return: the dict response.
+    """
+    print(url)
     try:
-        response = urllib2.urlopen(url)
-        #out += "/* <b>REQUEST</b><br/><pre>" + url + "</pre><p/><b>RESPONSE</b><br/><pre> */\n"
-        for line in response:
-            out += line
-        return out #+ "</pre>"
+        response = urlopen(url)
+        out = ""
+        for line in response.readlines():
+            out += bytes.decode(line)
+        print(out)
+        return json.loads(out)
     except URLError as e:
-        #return "<font color=\"red\">Error: %s</font>\n%s" % (str(e), url)
-        return "{'ERROR':'%s %s'}" % (str(e), url)
+        return "<font color=\"red\">Error: %s</font>" % (str(e))
+
 
 def build_facets(request_facets):
     map = {}
@@ -83,7 +117,8 @@ def build_facets(request_facets):
             out += ","
         out += key + ":" + map[key]
     return out + "}"
-    
+
+
 mens_facets = [    
 "hc_men_apparel_blazer_size",
 "hc_men_apparel_bottom_belt_size",
@@ -119,10 +154,10 @@ universal_facets = [
     "gender"
 ]
     
-config = ConfigParser.SafeConfigParser()
+config = configparser.ConfigParser()
 config.read("gangnam.config")
 host = config.get("zappos", "API-host")
 key = config.get("zappos", "API-key")
 
 if __name__ == '__main__':
-    CGIHandler().run(bottle.default_app())
+    app.run()

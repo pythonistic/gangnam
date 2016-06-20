@@ -1,0 +1,7 @@
+{% for result_row in result_rows %}
+<div class="row" id="top_row">
+    {% for result in result_row %}
+    <div class="col-sm-2"><img src="{{ result.thumbnailImageUrl }}"></div>
+    {% endfor %}
+</div>
+{% endfor %}
